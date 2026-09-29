@@ -1,62 +1,61 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 function App() {
-  const [first, setFirst] = useState("")
-  const [last, setLast] = useState("")
-  const [fullname,setFullname] = useState("")
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [submittedName, setSubmittedName] = useState("");
 
-function handlerfirst(e){
-  let firstName = e.target.value
+  function handlerfirst(e) {
+    setFirst(e.target.value);
+  }
 
-  setFirst(firstName)
-}
+  function handlerlast(e) {
+    setLast(e.target.value);
+  }
 
-function handlerlast(e){
-  let lastName = e.target.value
+  function submit(e) {
+    e.preventDefault();
 
-  setLast(lastName)
+    if (!first || !last) {
+      return;
+    }
 
-}
+    setSubmittedName(`${first} ${last}`);
+  }
 
-function submit(e){
-
-  e.preventDefault()
-  setFullname(`${first} ${last}`)
-
-  // setFirst("")
-  // setLast("")
-}
-
-
-function reset(){
-  setFirst("")
-  setLast("")
-  setFullname("")
-}
   return (
     <>
+      <h1>Full Name Display</h1>
 
-    <h1>Full Name Display</h1>
-    <form onSubmit={submit}>
-     <label htmlFor="first">FIrst Name</label>
-     <input type="text" required id="first" value={first} onChange={handlerfirst}/>
+      <form onSubmit={submit}>
+        <label htmlFor="first">First Name</label>
 
-<br />
-     <label htmlFor="last">Last Name</label>
-     <input type="text" required id='last' value={last} onChange={handlerlast}/>
-     <br />
+        <input
+          type="text"
+          id="first"
+          value={first}
+          onChange={handlerfirst}
+        />
 
-     <button >submit</button>
+        <br />
 
- <button onClick={reset}>reset</button>
+        <label htmlFor="last">Last Name</label>
 
-</form>
+        <input
+          type="text"
+          id="last"
+          value={last}
+          onChange={handlerlast}
+        />
 
-{fullname && (
-  <h2> {fullname}</h2>
-)}
+        <br />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      {submittedName && <h2>{submittedName}</h2>}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
