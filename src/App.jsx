@@ -16,10 +16,6 @@ function App() {
   function submit(e) {
     e.preventDefault();
 
-    if (!first || !last) {
-      return;
-    }
-
     setSubmittedName(`${first} ${last}`);
   }
 
@@ -35,6 +31,7 @@ function App() {
           id="first"
           value={first}
           onChange={handlerfirst}
+          required
         />
 
         <br />
@@ -46,6 +43,7 @@ function App() {
           id="last"
           value={last}
           onChange={handlerlast}
+          required
         />
 
         <br />
